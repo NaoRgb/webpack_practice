@@ -2,6 +2,9 @@ const path = require('path');
 const MiniCssExtractPlugin = require('Mini-Css-Extract-Plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// 追加
+//const path = require("path");
+
 
 module.exports = {
     entry: './src/javascripts/main.js',
@@ -12,13 +15,16 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css/,
+                test: /\.css|sass|scss/,
                 use: [
                     {
                         loader: MiniCssExtractPlugin.loader,
                     },
                     {
                         loader: 'css-loader',
+                    },
+                    {
+                        loader: 'sass-loader',
                     },
                 ],
             },
@@ -66,6 +72,13 @@ module.exports = {
             template: './src/templates/access.pug',
             filename: 'access.html',
         }),
+        new HtmlWebpackPlugin({
+            template: './src/templates/members/taro.pug',
+            filename: 'members/taro.html',
+        }),
         new CleanWebpackPlugin(),
     ],
+//    devServer: {
+//        static: path.resolve(__dirname, 'src'),
+//    },
 }
