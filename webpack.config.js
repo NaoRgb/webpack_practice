@@ -2,7 +2,6 @@ const path = require('path');
 const MiniCssExtractPlugin = require('Mini-Css-Extract-Plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-//const VueLoaderPlugin = require('vue-loader/lib/plugin');
 // 追加
 //const path = require("path");
 
@@ -10,10 +9,13 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
     mode: 'development',
     devtool: 'source-map',
-    entry: './src/javascripts/main.js',
+    entry: {
+        main: './src/javascripts/main.js',
+    },
     output: {
         path: path.resolve(__dirname, './dist'),
-        filename: 'javascripts/main.js'
+        filename: 'javascripts/main.js',
+        publicPath: '/', //追加
     },
     module: {
         rules: [
@@ -26,15 +28,6 @@ module.exports = {
                     },
                 ],
             },
-            // {
-            //     test: /\.vue/,
-            //     exclude: /node_modules/,
-            //     use: [
-            //         {
-            //             loader: 'vue-loader',
-            //         },
-            //     ],
-            // },
             {
                 test: /\.js/,
                 exclude: /node_modules/,
@@ -79,6 +72,7 @@ module.exports = {
                     //     options:{
                     //         esModule: false,
                     //         name: 'images/[name].[ext]',
+                    //         publicPath: '/',
                     //     },
                     // },
                         {
@@ -109,7 +103,6 @@ module.exports = {
         ],
     },
     plugins: [
-//        new VueLoaderPlugin(),
         new MiniCssExtractPlugin({
             filename: './stylesheets/main.css',
         }),
